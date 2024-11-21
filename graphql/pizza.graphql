@@ -1,0 +1,12 @@
+type Query {
+    pizzas: [Pizza!]! @paginate(defaultCount: 10)
+    pizza(id: ID! @eq): Pizza @find
+}
+
+type Pizza {
+    id: ID
+    chef: User! @belongsTo
+    size: String
+    crust: String
+    status: String
+}

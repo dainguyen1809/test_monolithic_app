@@ -1,0 +1,29 @@
+type Mutation {
+    createUser(
+        name: String!
+        email: String!
+        password: String! @hash @rules(apply: ["min:5"])
+    ): User! @create
+
+    updateUser(id: ID!, name: String!, password: String! @hash): User! @update
+
+    deleteUser(id: ID! @whereKey): User @delete
+
+    upsert(
+        id: ID!
+        name: String!
+        email: String!
+        password: String! @hash
+    ): User @upsert
+}
+
+type User {
+    id: ID
+    name: String
+    avatar: String
+    email: String
+    password: String
+    pizzas: [Pizza]! @with
+}
+
+#import upload-file.graphql
